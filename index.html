@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Phone Interface</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Keyframes for the blob animation */
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* Keyframes for the spinning loader */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Reusable glass styling for titles */
+        .glass-title-element {
+            background-color: rgba(255, 255, 255, 0.05); /* Same as button's bg-opacity-5 */
+            backdrop-filter: blur(8px); /* Same as button's backdrop-blur-md */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Same as button's border-opacity-20 */
+            border-radius: 1.5rem; /* rounded-3xl for the main card, or a similar rounded-xl for consistency if desired. Using rounded-xl to match buttons more. */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Similar to shadow-lg */
+            padding: 1rem 1.5rem; /* Adjusted padding for a more title-like appearance */
+            margin-bottom: 1.5rem; /* Spacing below the element */
+            display: inline-block; /* To allow padding/margin and fit content */
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4">
+
+    <!-- Glassmorphism card container -->
+    <div class="relative p-8 md:p-12 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-2xl border border-white border-opacity-20 max-w-lg w-full transform transition-all duration-300 hover:scale-[1.01] hover:shadow-purple-500/30">
+        <!-- Decorative background elements for better glass effect visibility -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <div class="absolute w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob top-0 left-0"></div>
+            <div class="absolute w-64 h-64 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 top-0 right-0"></div>
+            <div class="absolute w-64 h-64 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 bottom-0 left-0"></div>
+        </div>
+
+        <div class="relative z-10 text-center text-white">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 drop-shadow-lg leading-tight glass-title-element">
+                <span class="text-purple-300">Mobile Phone</span>
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-90 font-light glass-title-element">
+                A Mobile interface with backend
+            </p>
+
+            <!-- Grid for buttons to handle responsiveness -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Button 1 -->
+                <button id="button1" class="glass-button" data-text="App Access Portal" data-warning="Access A Portal To Build Apps">
+                    <span class="button-content">App Access Portal</span>
+                </button>
+                <!-- Button 2 with a warning -->
+                <button id="button2" class="glass-button" data-text="Ai Build Interface" data-warning="Seriously, Build Interface With Text Commands From LLM">
+                    <span class="button-content">Ai Build Interface</span>
+                </button>
+                <!-- Button 3 -->
+                <button id="button3" class="glass-button" data-text="View App Interface" data-warning="View Inteface Api and Builded Ai or Access Portal App">
+                    <span class="button-content">View App Interface</span>
+                </button>
+                <!-- Button 4 with another warning -->
+                <button id="button4" class="glass-button" data-text="Release To App Store" data-warning="You Upload to App Store Here">
+                    <span class="button-content">Release To App Store</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to create a spinning SVG loader
+        function createSpinnerSVG() {
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("class", "animate-spin -ml-1 mr-3 h-5 w-5 text-white");
+            svg.setAttribute("fill", "none");
+            svg.setAttribute("viewBox", "0 0 24 24");
+
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("class", "opacity-25");
+            circle.setAttribute("cx", "12");
+            circle.setAttribute("cy", "12");
+            circle.setAttribute("r", "10");
+            circle.setAttribute("stroke", "currentColor");
+            circle.setAttribute("stroke-width", "4");
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("class", "opacity-75");
+            path.setAttribute("fill", "currentColor");
+            path.setAttribute("d", "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z");
+
+            svg.appendChild(circle);
+            svg.appendChild(path);
+            return svg;
+        }
+
+        // Get all buttons with the 'glass-button' class
+        const buttons = document.querySelectorAll('.glass-button');
+
+        buttons.forEach(button => {
+            const originalText = button.dataset.text;
+            const warningText = button.dataset.warning;
+            const buttonContentSpan = button.querySelector('.button-content');
+
+            button.addEventListener('click', function() {
+                // Disable the button and add loading state classes
+                button.disabled = true;
+                button.classList.add('cursor-not-allowed', 'opacity-75');
+
+                // Clear previous content and append spinner and loading text
+                buttonContentSpan.innerHTML = '';
+                buttonContentSpan.appendChild(createSpinnerSVG());
+                const loadingTextNode = document.createTextNode('backend server loading');
+                buttonContentSpan.appendChild(loadingTextNode);
+
+                // Simulate backend loading
+                setTimeout(() => {
+                    // Re-enable the button and remove loading state classes
+                    button.disabled = false;
+                    button.classList.remove('cursor-not-allowed', 'opacity-75');
+
+                    // Restore original content
+                    buttonContentSpan.innerHTML = `
+                        ${originalText}
+                        ${warningText ? `<span class="block text-xs font-normal mt-1 opacity-75">${warningText}</span>` : ''}
+                    `;
+
+                    // Log to console (as the original React app did)
+                    console.log(`${originalText} was clicked. Loading complete.`);
+                    if (warningText) {
+                        console.warn(`Warning from "${originalText}": ${warningText}`);
+                    }
+                }, 2000); // 2 seconds loading time
+            });
+        });
+    </script>
+</body>
+</html>
